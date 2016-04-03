@@ -17,7 +17,7 @@ import wx.xrc
 class AutoTesterFrm ( wx.Frame ):
 	
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"AutoTester", pos = wx.DefaultPosition, size = wx.Size( 701,456 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"AutoTester", pos = wx.DefaultPosition, size = wx.Size( 668,449 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 		
@@ -144,34 +144,34 @@ class AutoTesterFrm ( wx.Frame ):
 		self.m_staticline2 = wx.StaticLine( self.panel_right_quick_keys, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		gbSizer7.Add( self.m_staticline2, wx.GBPosition( 1, 0 ), wx.GBSpan( 1, 5 ), wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_button2 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button2, wx.GBPosition( 2, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_alarm_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Alarm Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_alarm_setup, wx.GBPosition( 2, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button3 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button3, wx.GBPosition( 2, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_checkout = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Checkout", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_checkout, wx.GBPosition( 2, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button4 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button4, wx.GBPosition( 2, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_trends = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Trends", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_trends, wx.GBPosition( 2, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button5 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button5, wx.GBPosition( 2, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_procedures = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Procedures", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_procedures, wx.GBPosition( 2, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button6 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button6 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.m_button6, wx.GBPosition( 2, 4 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button7 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button7, wx.GBPosition( 3, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_vent_modes = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Vent Modes", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_vent_modes, wx.GBPosition( 3, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button8 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button8, wx.GBPosition( 3, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_sys_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Sys Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_sys_setup, wx.GBPosition( 3, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button9 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button9, wx.GBPosition( 3, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_screen_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Screen Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_screen_setup, wx.GBPosition( 3, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button10 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer7.Add( self.m_button10, wx.GBPosition( 3, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_spirometry = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Spirometry", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer7.Add( self.btn_spirometry, wx.GBPosition( 3, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button11 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.m_button11 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.m_button11, wx.GBPosition( 3, 4 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
 		
@@ -194,35 +194,14 @@ class AutoTesterFrm ( wx.Frame ):
 		self.m_staticline3 = wx.StaticLine( self.panel_right_command_keys, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.LI_HORIZONTAL )
 		gbSizer8.Add( self.m_staticline3, wx.GBPosition( 1, 0 ), wx.GBSpan( 1, 5 ), wx.EXPAND |wx.ALL, 5 )
 		
-		self.m_button12 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button12, wx.GBPosition( 2, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_com_wheel_right = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"Wheel Right", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer8.Add( self.btn_com_wheel_right, wx.GBPosition( 2, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.m_button13 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button13, wx.GBPosition( 2, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_com_wheel_confirm = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"Confirm", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer8.Add( self.btn_com_wheel_confirm, wx.GBPosition( 2, 1 ), wx.GBSpan( 2, 1 ), wx.ALL|wx.EXPAND, 5 )
 		
-		self.m_button14 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button14, wx.GBPosition( 2, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button15 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button15, wx.GBPosition( 2, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button16 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button16, wx.GBPosition( 2, 4 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button17 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button17, wx.GBPosition( 3, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button18 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button18, wx.GBPosition( 3, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button19 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button19, wx.GBPosition( 3, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button20 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button20, wx.GBPosition( 3, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
-		
-		self.m_button21 = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"MyButton", wx.DefaultPosition, wx.DefaultSize, 0 )
-		gbSizer8.Add( self.m_button21, wx.GBPosition( 3, 4 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
+		self.btn_com_wheel_left = wx.Button( self.panel_right_command_keys, wx.ID_ANY, u"Wheel Left", wx.DefaultPosition, wx.DefaultSize, 0 )
+		gbSizer8.Add( self.btn_com_wheel_left, wx.GBPosition( 3, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
 		
 		self.panel_right_command_keys.SetSizer( gbSizer8 )
@@ -244,8 +223,40 @@ class AutoTesterFrm ( wx.Frame ):
 		self.Layout()
 		
 		self.Centre( wx.BOTH )
+		
+		# Connect Events
+		self.tgl_btn_open.Bind( wx.EVT_TOGGLEBUTTON, self.open )
+		self.btn_alarm_setup.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_checkout.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_trends.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_procedures.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_vent_modes.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_sys_setup.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_screen_setup.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_spirometry.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_com_wheel_right.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_com_wheel_confirm.Bind( wx.EVT_BUTTON, self.send_key )
+		self.btn_com_wheel_left.Bind( wx.EVT_BUTTON, self.send_key )
 	
 	def __del__( self ):
 		pass
+	
+	
+	# Virtual event handlers, overide them in your derived class
+	def open( self, event ):
+		event.Skip()
+	
+	def send_key( self, event ):
+		event.Skip()
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 
