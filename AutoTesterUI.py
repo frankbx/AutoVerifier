@@ -121,6 +121,12 @@ class AutoTesterFrm ( wx.Frame ):
 		self.tgl_btn_open = wx.ToggleButton( self.panel_left, wx.ID_ANY, u"Open", wx.DefaultPosition, wx.DefaultSize, 0 )
 		bSizer2.Add( self.tgl_btn_open, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 1 )
 		
+		self.tgl_btn_recording = wx.ToggleButton( self.panel_left, wx.ID_ANY, u"Record", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer2.Add( self.tgl_btn_recording, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
+		self.btn_play = wx.Button( self.panel_left, wx.ID_ANY, u"Play", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer2.Add( self.btn_play, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		
 		
 		self.panel_left.SetSizer( bSizer2 )
 		self.panel_left.Layout()
@@ -147,13 +153,13 @@ class AutoTesterFrm ( wx.Frame ):
 		self.btn_alarm_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Alarm Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_alarm_setup, wx.GBPosition( 2, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_checkout = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Checkout", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_checkout = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_checkout, wx.GBPosition( 2, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_trends = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Trends", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_trends = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_trends, wx.GBPosition( 2, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_procedures = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Procedures", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_procedures = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_procedures, wx.GBPosition( 2, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
 		self.m_button6 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -162,13 +168,13 @@ class AutoTesterFrm ( wx.Frame ):
 		self.btn_vent_modes = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Vent Modes", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_vent_modes, wx.GBPosition( 3, 0 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_sys_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Sys Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_sys_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_sys_setup, wx.GBPosition( 3, 1 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_screen_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Screen Setup", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_screen_setup = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_screen_setup, wx.GBPosition( 3, 2 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
-		self.btn_spirometry = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"Spirometry", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btn_spirometry = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
 		gbSizer7.Add( self.btn_spirometry, wx.GBPosition( 3, 3 ), wx.GBSpan( 1, 1 ), wx.ALL, 5 )
 		
 		self.m_button11 = wx.Button( self.panel_right_quick_keys, wx.ID_ANY, u"TBD", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -226,6 +232,8 @@ class AutoTesterFrm ( wx.Frame ):
 		
 		# Connect Events
 		self.tgl_btn_open.Bind( wx.EVT_TOGGLEBUTTON, self.open )
+		self.tgl_btn_recording.Bind( wx.EVT_TOGGLEBUTTON, self.recording )
+		self.btn_play.Bind( wx.EVT_BUTTON, self.play )
 		self.btn_alarm_setup.Bind( wx.EVT_BUTTON, self.send_key )
 		self.btn_checkout.Bind( wx.EVT_BUTTON, self.send_key )
 		self.btn_trends.Bind( wx.EVT_BUTTON, self.send_key )
@@ -244,6 +252,12 @@ class AutoTesterFrm ( wx.Frame ):
 	
 	# Virtual event handlers, overide them in your derived class
 	def open( self, event ):
+		event.Skip()
+	
+	def recording( self, event ):
+		event.Skip()
+	
+	def play( self, event ):
 		event.Skip()
 	
 	def send_key( self, event ):

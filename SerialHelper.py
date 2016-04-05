@@ -12,7 +12,7 @@ import serial
 
 
 class SerialHelper(object):
-    def __init__(self, Port="COM4", BaudRate="19200", ByteSize="8", Parity="N", Stopbits="1"):
+    def __init__(self, Port="COM1", BaudRate="19200", ByteSize="8", Parity="N", Stopbits="1"):
         '''
         初始化一些参数
         '''
@@ -27,9 +27,6 @@ class SerialHelper(object):
         self.receive_data = ""
 
     def start(self):
-        '''
-        开始，打开串口
-        '''
         self.l_serial = serial.Serial()
         self.l_serial.port = self.port
         self.l_serial.baudrate = self.baudrate
@@ -47,37 +44,17 @@ class SerialHelper(object):
             logging.error(e)
 
     def stop(self):
-        '''
-        结束，关闭串口
-        '''
         self.alive = False
         if self.l_serial.isOpen():
             self.l_serial.close()
 
-    def read(self):
-        '''
-        循环读取串口发送的数据
-        '''
-        while self.alive:
-            try:
-                number = self.l_serial.inWaiting()
-                if number:
-                    self.receive_data += self.l_serial.read(number).replace(binascii.unhexlify("00"), "")
-                    if self.thresholdValue <= len(self.receive_data):
-                        self.receive_data = ""
-            except Exception as e:
-                logging.error(e)
-
-    def write(self, data, isHex=False):
-        '''
-        发送数据给串口设备
-        '''
+    def write(self, data, isRecording=False):
         if self.alive:
             if self.l_serial.isOpen():
-                if isHex:
-                    # data = data.replace(" ", "").replace("\n", "")
+                if isRecording:
                     data = binascii.unhexlify(data)
                 self.l_serial.write(data)
+                print data
 
 
 if __name__ == '__main__':

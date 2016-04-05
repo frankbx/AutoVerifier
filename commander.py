@@ -4,8 +4,13 @@
 import time
 import serial
 
-
 """
+	soft_key1				= (unsigned char) 0xa0,
+	soft_key2				= (unsigned char) 0xa1,
+	soft_key3				= (unsigned char) 0xa2,
+	soft_key4				= (unsigned char) 0xa3,
+	soft_key5				= (unsigned char) 0xa4,
+	soft_key6				= (unsigned char) 0xa5,
     VK_F1,          KEY_ACTION_QUICKKEY_1,               
     VK_F2,          KEY_ACTION_QUICKKEY_2,               
     VK_F3,          KEY_ACTION_QUICKKEY_3,               
@@ -91,7 +96,7 @@ while 1:
     else:
         # send the character to the device
         # (note that I append a \r\n carriage return and line feed to the characters - this is requested by my device)
-        ser.write(input+'\na')
+        ser.write(input + '\na')
         out = ''
         # let's wait one second before reading output (let's give device time to answer)
         time.sleep(1)
