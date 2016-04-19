@@ -69,9 +69,10 @@ class AutoTester(AutoTesterFrm):
         btn = event.GetEventObject().GetLabelText()
         key = self.button_to_key_press(btn)
         self.serial_helper.write(key)
-        if self.is_recording == True:
+        if self.is_recording is True:
             self.script_helper.write(key + '\n')
 
+    # TODO add more keys here
     def button_to_key_press(self, btn):
         if btn == 'Wheel Right':
             return VK_UP
