@@ -24,7 +24,7 @@ VK_RETURN = chr(13)
 
 class AutoTester(AutoTesterFrm):
     def __init__(self):
-        AutoTesterFrm.__init__(self, None)
+        super(AutoTester, self).__init__(None)
         self.serial_helper = None
         self.script_helper = None
         self.com_ports = list()
@@ -38,14 +38,12 @@ class AutoTester(AutoTesterFrm):
     '''
 
     def find_all_serial_ports(self):
-
         if platform.system() == "Windows":
             try:
                 self.com_ports = list()
                 self.ports_list.Clear()
                 for com in list_ports.comports():
                     strCom = com[0]
-                    # self.com_ports.append(strCom)
                     self.com_ports.append(strCom)
                 for item in self.com_ports:
                     self.ports_list.Append(item)
@@ -72,6 +70,7 @@ class AutoTester(AutoTesterFrm):
         if self.is_recording == True:
             self.script_helper.write(key + '\n')
 
+    # TODO Change to dict approach
     def button_to_key_press(self, btn):
         if btn == 'Wheel Right':
             return VK_UP

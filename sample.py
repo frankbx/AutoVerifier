@@ -7,6 +7,7 @@ from PIL import Image
 from pylab import *
 
 from AbbyyOnlineSdk import *
+import OCRProcessor
 
 img = Image.open('1.bmp')
 processor = AbbyyOnlineSdk()
