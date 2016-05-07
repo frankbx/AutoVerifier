@@ -96,7 +96,7 @@ class AutoTester(AutoTesterFrm):
                 self.parity = self.parity_list.GetStringSelection()
                 self.databit = self.databit_list.GetStringSelection()
                 self.stopbit = self.stopbit_list.GetStringSelection()
-                print self.port, self.baudrate, self.parity, self.databit, self.stopbit
+                print(self.port, self.baudrate, self.parity, self.databit, self.stopbit)
                 self.serial_helper = SerialHelper(Port=self.port,
                                                   BaudRate=self.baudrate,
                                                   ByteSize=self.databit,
@@ -146,7 +146,8 @@ class AutoTester(AutoTesterFrm):
         self.script_helper = ScriptHelper("script.txt", 'r')
         if self.serial_helper is None:
             self.toggle()
-        print self.serial_helper
+        print
+        self.serial_helper
         for line in self.script_helper.readlines():
             # print line[:-1]
             import time

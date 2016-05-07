@@ -54,7 +54,7 @@ class SerialHelper(object):
                 if isRecording:
                     data = binascii.unhexlify(data)
                 self.l_serial.write(data)
-                print data
+                print (data)
 
 
 if __name__ == '__main__':
