@@ -19,19 +19,18 @@ class AutoTesterFrm ( wx.Frame ):
 	def __init__( self, parent ):
 		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"AutoTester", pos = wx.DefaultPosition, size = wx.Size( 668,449 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 		
-		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
-		
-		self.status_bar = self.CreateStatusBar( 1, wx.ST_SIZEGRIP, wx.ID_ANY )
+
+		self.status_bar = self.CreateStatusBar( 1, wx.STB_DEFAULT_STYLE, wx.ID_ANY )
 		self.menubar = wx.MenuBar( 0 )
 		self.mnu_file = wx.Menu()
 		self.mnu_file_exit = wx.MenuItem( self.mnu_file, wx.ID_ANY, u"Exit", wx.EmptyString, wx.ITEM_NORMAL )
-		self.mnu_file.AppendItem( self.mnu_file_exit )
+		self.mnu_file.Append( self.mnu_file_exit )
 		
 		self.menubar.Append( self.mnu_file, u"File" ) 
 		
 		self.mnu_help = wx.Menu()
 		self.mnu_help_about = wx.MenuItem( self.mnu_help, wx.ID_ANY, u"About", wx.EmptyString, wx.ITEM_NORMAL )
-		self.mnu_help.AppendItem( self.mnu_help_about )
+		self.mnu_help.Append( self.mnu_help_about )
 		
 		self.menubar.Append( self.mnu_help, u"Help" ) 
 		
