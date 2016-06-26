@@ -53,7 +53,9 @@ class SerialHelper(object):
             if self.l_serial.isOpen():
                 if isRecording:
                     data = binascii.unhexlify(data)
-                self.l_serial.write(data)
+                print(data.encode(encoding="utf-8"))
+                print(type(data.encode(encoding="utf-8")))
+                self.l_serial.write(data.encode(encoding="utf-8"))
                 print (data)
 
 

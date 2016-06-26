@@ -20,6 +20,9 @@ logging.basicConfig(level=logging.DEBUG,
 VK_DOWN = chr(0xd6)
 VK_UP = chr(0xd5)
 VK_RETURN = chr(13)
+VK_B2D = chr(0x2e)
+VK_CF = chr(0x2d)
+VK_CFGAIN = chr(0x31)
 
 
 class AutoTester(AutoTesterFrm):
@@ -73,11 +76,11 @@ class AutoTester(AutoTesterFrm):
     # TODO Change to dict approach
     def button_to_key_press(self, btn):
         if btn == 'Wheel Right':
-            return VK_UP
+            return VK_B2D
         elif btn == 'Wheel Left':
-            return VK_DOWN
+            return VK_CF
         elif btn == 'Confirm':
-            return VK_RETURN
+            return VK_CFGAIN
         elif btn == 'Vent Modes':
             return 'v'
         elif btn == 'Alarm Setup':
