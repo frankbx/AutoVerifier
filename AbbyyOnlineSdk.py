@@ -4,7 +4,6 @@
 
 import base64
 import urllib
-import urllib2
 import xml.dom.minidom
 
 import MultipartPostHandler
@@ -46,7 +45,7 @@ class AbbyyOnlineSdk:
         requestUrl = self.ServerUrl + "processImage?" + urlParams
 
         bodyParams = {"file": open(filePath, "rb")}
-        request = urllib2.Request(requestUrl, None, self.buildAuthInfo())
+        request = urllib.request.Request(requestUrl, None, self.buildAuthInfo())
         response = self.getOpener().open(request, bodyParams).read()
         if response.find('<Error>') != -1:
             return None
@@ -59,7 +58,7 @@ class AbbyyOnlineSdk:
     def GetTaskStatus(self, task):
         urlParams = urllib.urlencode({"taskId": task.Id})
         statusUrl = self.ServerUrl + "getTaskStatus?" + urlParams
-        request = urllib2.Request(statusUrl, None, self.buildAuthInfo())
+        request = urllib.request.Request(statusUrl, None, self.buildAuthInfo())
         response = self.getOpener().open(request).read()
         task = self.DecodeResponse(response)
         return task
@@ -67,10 +66,10 @@ class AbbyyOnlineSdk:
     def DownloadResult(self, task, outputPath):
         getResultParams = urllib.urlencode({"taskId": task.Id})
         getResultUrl = self.ServerUrl + "getResult?" + getResultParams
-        request = urllib2.Request(getResultUrl, None, self.buildAuthInfo())
+        request = urllib.request.Request(getResultUrl, None, self.buildAuthInfo())
         fileResponse = self.getOpener().open(request).read()
         resultFile = open(outputPath, "wb")
-        print 'File Response', fileResponse
+        print('File Response', fileResponse)
         resultFile.write(fileResponse)
         return fileResponse
 
@@ -90,11 +89,11 @@ class AbbyyOnlineSdk:
 
     def getOpener(self):
         if self.Proxy == None:
-            self.opener = urllib2.build_opener(MultipartPostHandler.MultipartPostHandler,
-                                               urllib2.HTTPHandler(debuglevel=self.enableDebugging))
+            self.opener = urllib.build_opener(MultipartPostHandler.MultipartPostHandler,
+                                              urllib.HTTPHandler(debuglevel=self.enableDebugging))
         else:
-            self.opener = urllib2.build_opener(
+            self.opener = urllib.build_opener(
                 self.Proxy,
                 MultipartPostHandler.MultipartPostHandler,
-                urllib2.HTTPHandler(debuglevel=self.enableDebugging))
+                urllib.HTTPHandler(debuglevel=self.enableDebugging))
         return self.opener

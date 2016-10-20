@@ -5,14 +5,14 @@ import time
 
 from PIL import Image
 from pylab import *
-
 from AbbyyOnlineSdk import *
+import urllib
 import OCRProcessor
 
 img = Image.open('1.bmp')
 processor = AbbyyOnlineSdk()
 # print "Using proxy at %s" % proxyString
-processor.Proxy = urllib2.ProxyHandler({"http": '3.20.128.6:88'})
+processor.Proxy = urllib.ProxyHandler({"http": '3.20.128.6:88'})
 
 
 def show_pic(img):
@@ -23,16 +23,16 @@ def show_pic(img):
 
 # Recognize a file at filePath and save result to resultFilePath
 def recognizeFile(filePath, resultFilePath, language, outputFormat):
-    print "Uploading.."
+    print("Uploading..")
     settings = ProcessingSettings()
     settings.Language = language
     settings.OutputFormat = outputFormat
     task = processor.ProcessImage(filePath, settings)
     if task == None:
-        print "Error"
+        print("Error")
         return
-    print "Id = %s" % task.Id
-    print "Status = %s" % task.Status
+    print("Id = %s" % task.Id)
+    print("Status = %s" % task.Status)
 
     # Wait for the task to be completed
     sys.stdout.write("Waiting..")
@@ -49,14 +49,14 @@ def recognizeFile(filePath, resultFilePath, language, outputFormat):
         sys.stdout.write(".")
         task = processor.GetTaskStatus(task)
 
-    print "Status = %s" % task.Status
+    print("Status = %s" % task.Status)
 
     if task.Status == "Completed":
         if task.DownloadUrl is not None:
             result = processor.DownloadResult(task, resultFilePath)
-            print "Result was written to %s" % resultFilePath
+            print("Result was written to %s" % resultFilePath)
     else:
-        print "Error processing task"
+        print("Error processing task")
 
     return result
 

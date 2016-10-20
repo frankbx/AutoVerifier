@@ -1,58 +1,34 @@
 #! /usr/bin/env python
 # coding=utf-8
-import logging
-import platform
-import sys
 
 import psutil
-import qdarkstyle
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtGui import *
+# import qdarkstyle
 
-if platform.system() == "Windows":
-    from  serial.tools import list_ports
-elif platform.system() == "Linux":
-    pass
-EVENT_TIMER = 'eTimer'
+from ControlPadDockWidget import *
+from SerialPortDockWidget import *
+from ScriptDockWidget import *
 
 
 class AutoTesterMainWindow(QMainWindow):
     def __init__(self):
         super(AutoTesterMainWindow, self).__init__()
-        self.setWindowTitle('Auto Tester')
-        self.initUI()
+        self.setWindowTitle('Automation')
+        self.initCentralWidget()
+        self.setCentralWidget(self.centralWidget)
         self.initMenu()
         self.initStatusBar()
+        self.serialPortDockWidget = SerialPortDockWidget(self)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.serialPortDockWidget)  # ,Qt.BottomRightCorner)
+        self.controlPadDockWidget = ControlPadDockWidget(self)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.controlPadDockWidget)
+        self.scriptDockWidget = ScriptDockWidget(self)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.scriptDockWidget)  # ,Qt.TopRightCorner)
+        self.tabifyDockWidget(self.controlPadDockWidget, self.serialPortDockWidget)
 
-    def initUI(self):
-        # -----------------------------------------------------------------------------------------
-        # initialize central widget
-        self.imageLabel = QLabel()
-        self.imageLabel.setMinimumSize(200, 200)
-        self.imageLabel.setContextMenuPolicy(Qt.ActionsContextMenu)
-        self.setCentralWidget(self.imageLabel)
-
-        # -------------------------------------------------------------------------------------------
-        # initialize DockWidget to contain SerialPortWidget
-        serialPortDockWidget = QDockWidget('Serial Port', self)
-        serialPortDockWidget.setObjectName('SerialPortDockWidget')
-        serialPortDockWidget.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
-
-        # -----------------------------------------------------------------------------------------
-        # initialize widget contains list of serial ports and serial port settings
-        serialPortWidget = QWidget()
-        self.serialPortCombo = QComboBox()
-        self.fill_in_all_serial_ports(self.serialPortCombo)
-        serialPortLayout = QGridLayout()
-        serialPortLayout.addWidget(self.serialPortCombo, 0, 0)
-        serialPortWidget.setLayout(serialPortLayout)
-        serialPortWidget.setGeometry(300,300,300,200)
-
-
-        serialPortDockWidget.setWidget(serialPortWidget)
-
-
-        self.addDockWidget(Qt.LeftDockWidgetArea, serialPortDockWidget)
+    def initCentralWidget(self):
+        self.centralWidget = QWidget()
+        self.centralWidget.setFixedSize(1024, 768)
 
     def initMenu(self):
         menubar = self.menuBar()
@@ -83,7 +59,7 @@ class AutoTesterMainWindow(QMainWindow):
     def getCpuMemory(self):
         cpuPercent = psutil.cpu_percent()
         memoryPercent = psutil.virtual_memory().percent
-        return 'CPU使用率：%d%%   内存使用率：%d%%' % (cpuPercent, memoryPercent)
+        return 'CPU Usage：%d%%   Memory Usage：%d%%' % (cpuPercent, memoryPercent)
 
     def openAbout(self):
         aboutWidget = AboutWidget(self)
@@ -98,41 +74,19 @@ class AutoTesterMainWindow(QMainWindow):
         else:
             event.ignore()
 
-    def fill_in_all_serial_ports(self, widget):
-        if platform.system() == "Windows":
-            try:
-                self.com_ports = list()
-                # self.ports_list.Clear()
-                for com in list_ports.comports():
-                    strCom = com[0]
-                    self.com_ports.append(strCom)
-                for item in self.com_ports:
-                    widget.addItem(item)
-                if len(self.com_ports) >= 1:
-                    pass
-
-            except Exception as e:
-                logging.error(e)
-        elif platform.system() == "Linux":
-            # No Linux system supported so far
-            pass
-
 
 class AboutWidget(QDialog):
     # ----------------------------------------------------------------------
     def __init__(self, parent=None):
         super(AboutWidget, self).__init__(parent)
-
         self.initUi()
 
     # ----------------------------------------------------------------------
     def initUi(self):
         self.setWindowTitle('About Tester')
-
-        text = u"""
-            Developed by testers, for tester.
+        text = """
+            Developed by testers, for testers.
             """
-
         label = QLabel()
         label.setText(text)
         label.setMinimumWidth(500)
@@ -144,8 +98,10 @@ class AboutWidget(QDialog):
 
 
 if __name__ == '__main__':
+    print(PYQT_VERSION_STR)
     app = QApplication(sys.argv)
-    app.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
+    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     mainWindow = AutoTesterMainWindow()
+    # mainWindow.setFixedSize(1024, 768)
     mainWindow.showMaximized()
     sys.exit(app.exec_())

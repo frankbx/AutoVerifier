@@ -20,9 +20,6 @@ logging.basicConfig(level=logging.DEBUG,
 VK_DOWN = chr(0xd6)
 VK_UP = chr(0xd5)
 VK_RETURN = chr(13)
-VK_B2D = chr(0x2e)
-VK_CF = chr(0x2d)
-VK_CFGAIN = chr(0x31)
 
 
 class AutoTester(AutoTesterFrm):
