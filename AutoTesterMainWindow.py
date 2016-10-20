@@ -1,13 +1,17 @@
 #! /usr/bin/env python
 # coding=utf-8
 
-import psutil
-from PyQt5.QtGui import *
-# import qdarkstyle
+import sys
 
-from ControlPadDockWidget import *
-from SerialPortDockWidget import *
-from ScriptDockWidget import *
+import psutil
+import qdarkstyle
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+from ControlPadDockWidget import ControlPadDockWidget
+from ScriptDockWidget import ScriptDockWidget
+from SerialPortDockWidget import SerialPortDockWidget
 
 
 class AutoTesterMainWindow(QMainWindow):
