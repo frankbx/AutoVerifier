@@ -95,11 +95,11 @@ class AutoTester(AutoTesterFrm):
                 self.databit = self.databit_list.GetStringSelection()
                 self.stopbit = self.stopbit_list.GetStringSelection()
                 print(self.port, self.baudrate, self.parity, self.databit, self.stopbit)
-                self.serial_helper = SerialHelper(Port=self.port,
-                                                  BaudRate=self.baudrate,
-                                                  ByteSize=self.databit,
-                                                  Parity=self.parity,
-                                                  Stopbits=self.stopbit)
+                self.serial_helper = SerialHelper(port=self.port,
+                                                  baudrate=self.baudrate,
+                                                  bytesize=self.databit,
+                                                  parity=self.parity,
+                                                  stopbits=self.stopbit)
                 self.serial_helper.start()
                 self.tgl_btn_open.SetLabelText("Close")
                 self.tgl_btn_open.SetBackgroundColour("Blue")

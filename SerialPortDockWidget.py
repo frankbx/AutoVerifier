@@ -1,11 +1,12 @@
-import logging
-import platform
+#! /usr/bin/env python
+# coding=utf-8
+
 import sys
 
 import qdarkstyle
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
-from serial.tools import list_ports
+from SerialHelper import SerialHelper
 
 
 # TODO add code to open/close serial port
@@ -23,10 +24,9 @@ class SerialPortDockWidget(QDockWidget):
         self.initSerialPortControlWidget()
         vbox.addWidget(self.serialPortSettingWidget)
         vbox.addWidget(self.serialPortControlWidget)
-        # vbox.setStretchFactor(self.serialPortSettingWidget, 0)
-        # vbox.setStretchFactor(self.serialPortControlWidget, 0)
         self.setWidget(serialPortWidget)
-        self.setFixedSize(200,300)
+        self.setFixedSize(200, 300)
+        self.com_ports = list()
 
     def initSerialPortControlWidget(self):
         self.serialPortControlWidget = QWidget()
@@ -41,7 +41,9 @@ class SerialPortDockWidget(QDockWidget):
         self.serialPortSettingWidget = QWidget()
         self.serialPortCombo = QComboBox()
         self.serialPortCombo.sizePolicy()
-        self.fill_in_all_serial_ports(self.serialPortCombo)
+        self.com_ports = SerialHelper.get_all_serial_ports()
+        for port in self.com_ports:
+            self.serialPortCombo.addItem(port)
         serialPortLayout = QGridLayout()
         serialPortLayout.setSpacing(10)
         serialPortLayout.addWidget(self.serialPortCombo, 0, 0, 1, 2)
@@ -75,23 +77,6 @@ class SerialPortDockWidget(QDockWidget):
         stopbitCombo.addItems(stopbit_list)
         serialPortLayout.addWidget(stopbitLabel, 4, 0)
         serialPortLayout.addWidget(stopbitCombo, 4, 1)
-
-    def fill_in_all_serial_ports(self, widget):
-        if platform.system() == "Windows":
-            try:
-                self.com_ports = list()
-                for com in list_ports.comports():
-                    strCom = com[0]
-                    self.com_ports.append(strCom)
-                for item in self.com_ports:
-                    widget.addItem(item)
-                if len(self.com_ports) >= 1:
-                    pass
-            except Exception as e:
-                logging.error(e)
-        elif platform.system() == "Linux":
-            # No Linux system supported so far
-            pass
 
 
 if __name__ == '__main__':

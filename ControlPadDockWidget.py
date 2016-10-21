@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+# coding=utf-8
 import sys
 
 import qdarkstyle
@@ -22,12 +24,11 @@ class ControlPadDockWidget(QDockWidget):
         vbox.addWidget(self.quickKeyPadWidget)
         vbox.addWidget(self.controlPadWidget)
         self.setWidget(controlPadWidget)
-        # self.setFeatures(self.Do)
 
     def initQuickKeyPad(self):
         self.quickKeyPadWidget = QWidget()
         grid = QGridLayout()
-        # TODO Fill in proper names instead of placehold
+        # TODO Fill in proper names instead of placeholder
         names = ['A', 'V', 'C', 'D', 'E', 'F', '/',
                  '4', '5', '6', '#', '1', '2', '3', '-', '0',
                  '.', '=', '+', 'K']

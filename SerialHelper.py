@@ -1,62 +1,64 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-
-
-__author__ = "Frank Bao"
-__version__ = "v1.0"
-
 import binascii
-import logging
+import platform
 
 import serial
+from serial.tools import list_ports
+
+''' Utility class to operate Serial Ports'''
 
 
 class SerialHelper(object):
-    def __init__(self, Port="COM1", BaudRate="19200", ByteSize="8", Parity="N", Stopbits="1"):
-        '''
-        初始化一些参数
-        '''
-        self.l_serial = None
+    def __init__(self):
+        self.serial_port = None
         self.alive = False
-        self.port = Port
-        self.baudrate = BaudRate
-        self.bytesize = ByteSize
-        self.parity = Parity
-        self.stopbits = Stopbits
-        self.thresholdValue = 64
-        self.receive_data = ""
 
-    def start(self):
-        self.l_serial = serial.Serial()
-        self.l_serial.port = self.port
-        self.l_serial.baudrate = self.baudrate
-        self.l_serial.bytesize = int(self.bytesize)
-        self.l_serial.parity = self.parity
-        self.l_serial.stopbits = int(self.stopbits)
-        self.l_serial.timeout = 2
+    def start(self, port="COM1", baudrate="19200", bytesize="8", parity="N", stopbits="1"):
+        self.serial_port = serial.Serial(port=port, baudrate=baudrate, bytesize=bytesize, parity=parity,
+                                         stopbits=stopbits)
+
+        self.serial_port.timeout = 2
 
         try:
-            self.l_serial.open()
-            if self.l_serial.isOpen():
+            self.serial_port.open()
+            if self.serial_port.isOpen():
                 self.alive = True
         except Exception as e:
             self.alive = False
-            logging.error(e)
+            print(e)
 
     def stop(self):
-        self.alive = False
-        if self.l_serial.isOpen():
-            self.l_serial.close()
+        if self.alive is True:
+            self.alive = False
+            if self.serial_port.isOpen():
+                self.serial_port.close()
 
     def write(self, data, isRecording=False):
         if self.alive:
-            if self.l_serial.isOpen():
+            if self.serial_port.isOpen():
                 if isRecording:
                     data = binascii.unhexlify(data)
-                print(data.encode(encoding="utf-8"))
-                print(type(data.encode(encoding="utf-8")))
-                self.l_serial.write(data.encode(encoding="utf-8"))
-                print (data)
+                # print(data.encode(encoding="utf-8"))
+                # print(type(data.encode(encoding="utf-8")))
+                self.serial_port.write(data.encode(encoding="utf-8"))
+                # print(data)
+
+    @staticmethod
+    def get_all_serial_ports():
+        com_ports = []
+        if platform.system() == "Windows":
+
+            try:
+                for com in list_ports.comports():
+                    strCom = com[0]
+                    com_ports.append(strCom)
+            except Exception as e:
+                print(e)
+        elif platform.system() == "Linux":
+            # No Linux system supported so far
+            pass
+        return com_ports
 
 
 if __name__ == '__main__':
