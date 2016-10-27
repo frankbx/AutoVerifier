@@ -10,32 +10,32 @@ from serial.tools import list_ports
 
 
 class SerialHelper(object):
-    def __init__(self):
-        self.serial_port = None
+    def __init__(self, port="COM6", baudrate="19200", bytesize=8, parity="N", stopbits=1):
         self.alive = False
-
-    def start(self, port="COM1", baudrate="19200", bytesize="8", parity="N", stopbits="1"):
         self.serial_port = serial.Serial(port=port, baudrate=baudrate, bytesize=bytesize, parity=parity,
                                          stopbits=stopbits)
 
+    def start(self, ):
         self.serial_port.timeout = 2
-
         try:
             self.serial_port.open()
             if self.serial_port.isOpen():
                 self.alive = True
+                print("port opened successfully")
         except Exception as e:
             self.alive = False
             print(e)
 
     def stop(self):
-        if self.alive is True:
-            self.alive = False
-            if self.serial_port.isOpen():
-                self.serial_port.close()
+        # if self.alive is True:
+        self.alive = False
+        if self.serial_port.isOpen():
+            self.serial_port.close()
+        print(self.alive, self.serial_port.isOpen())
 
     def write(self, data, isRecording=False):
         if self.alive:
+            print(data)
             if self.serial_port.isOpen():
                 if isRecording:
                     data = binascii.unhexlify(data)
@@ -48,7 +48,6 @@ class SerialHelper(object):
     def get_all_serial_ports():
         com_ports = []
         if platform.system() == "Windows":
-
             try:
                 for com in list_ports.comports():
                     strCom = com[0]
@@ -62,15 +61,13 @@ class SerialHelper(object):
 
 
 if __name__ == '__main__':
-    import threading
-
-    ser = SerialHelper()
+    ser = SerialHelper(port="COM3")
     ser.start()
 
-    ser.write("123", isHex=False)
-    thread_read = threading.Thread(target=ser.read)
-    thread_read.setDaemon(True)
-    thread_read.start()
+    ser.write("123")
+    # thread_read = threading.Thread(target=ser.read)
+    # thread_read.setDaemon(True)
+    # thread_read.start()
     import time
 
     time.sleep(5)

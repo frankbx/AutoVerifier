@@ -51,10 +51,10 @@ class ControlPadDockWidget(QDockWidget):
         self.controlPadWidget = QWidget()
         vbox = QVBoxLayout()
         self.controlPadWidget.setLayout(vbox)
-        recordButton = QPushButton("Record")
-        playButton = QPushButton("Play")
-        vbox.addWidget(recordButton)
-        vbox.addWidget(playButton)
+        self.recordButton = QPushButton("Record")
+        self.playButton = QPushButton("Play")
+        vbox.addWidget(self.recordButton)
+        vbox.addWidget(self.playButton)
 
 
 if __name__ == '__main__':
