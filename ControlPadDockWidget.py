@@ -44,6 +44,7 @@ class ControlPadDockWidget(QDockWidget):
             button = QPushButton(i)
             grid.addWidget(button, pos[j][0], pos[j][1])
             # TODO add connection to actions
+            button.clicked.connect(self.sendKey)
             j = j + 1
         self.quickKeyPadWidget.setLayout(grid)
 
@@ -56,6 +57,8 @@ class ControlPadDockWidget(QDockWidget):
         vbox.addWidget(self.recordButton)
         vbox.addWidget(self.playButton)
 
+    def sendKey(self):
+        pass
 
 if __name__ == '__main__':
     print(PYQT_VERSION_STR)
