@@ -7,10 +7,15 @@ import serial
 from serial.tools import list_ports
 
 ''' Utility class to operate Serial Ports'''
+VK_DOWN = chr(0xd6)
+VK_UP = chr(0xd5)
+VK_RETURN = chr(13)
+VK_VENT_MODES = 'v'
+VK_ALARM_SETUP = 'a'
 
 
 class SerialHelper(object):
-    def __init__(self, port="COM6", baudrate="19200", bytesize=8, parity="N", stopbits=1):
+    def __init__(self, port="COM3", baudrate="19200", bytesize=8, parity="N", stopbits=1):
         self.alive = False
         self.serial_port = serial.Serial(port=port, baudrate=baudrate, bytesize=bytesize, parity=parity,
                                          stopbits=stopbits)
@@ -49,9 +54,7 @@ class SerialHelper(object):
         com_ports = []
         if platform.system() == "Windows":
             try:
-                for com in list_ports.comports():
-                    strCom = com[0]
-                    com_ports.append(strCom)
+                com_ports = [com[0] for com in list_ports.comports()]
             except Exception as e:
                 print(e)
         elif platform.system() == "Linux":

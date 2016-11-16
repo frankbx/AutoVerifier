@@ -10,7 +10,7 @@ from SerialHelper import SerialHelper
 
 
 class SerialPortDockWidget(QDockWidget):
-    def __init__(self, parent=None):
+    def __init__(self, serialHelper=None, parent=None):
         super(SerialPortDockWidget, self).__init__("Serial Port", parent)
         self.setObjectName('SerialPortDockWidget')
         self.setAllowedAreas(Qt.LeftDockWidgetArea | Qt.RightDockWidgetArea)
@@ -25,7 +25,7 @@ class SerialPortDockWidget(QDockWidget):
         self.setWidget(serialPortWidget)
         self.setFixedSize(200, 300)
         self.com_ports = list()
-        self.serialHelper = None
+        self.serialHelper = serialHelper
 
     def initSerialPortControlWidget(self):
         self.serialPortControlWidget = QWidget()
@@ -42,8 +42,8 @@ class SerialPortDockWidget(QDockWidget):
         self.serialPortSettingWidget = QWidget()
         self.serialPortCombo = QComboBox()
         self.serialPortCombo.sizePolicy()
-        self.ports = SerialHelper.get_all_serial_ports()
-        self.com_ports = self.ports
+        self.com_ports = SerialHelper.get_all_serial_ports()
+        # self.com_ports = self.ports
         for port in self.com_ports:
             self.serialPortCombo.addItem(port)
         serialPortLayout = QGridLayout()
@@ -84,22 +84,25 @@ class SerialPortDockWidget(QDockWidget):
         print("open button clicked")
         if self.serialHelper is None:
             port = self.serialPortCombo.currentText()
-            print("port is",port)
+            print("port is", port)
             if port.startswith("COM"):
                 self.serialHelper = SerialHelper(port=port)
-                print(port)
-                #print(self.serialHelper.alive, self.serialHelper.serial_port.isOpen())
-                if not self.serialHelper.alive:
-                    self.serialHelper.start()
-                    print(self.serialHelper.alive, self.serialHelper.serial_port.isOpen())
+                self.parent.serialHelper = self.serialHelper
+                # print(port)
+                # print(self.serialHelper.alive, self.serialHelper.serial_port.isOpen())
+        if not self.serialHelper.alive:
+            self.serialHelper.start()
+            print(self.serialHelper.alive, self.serialHelper.serial_port.isOpen())
+
 
     # TODO disable close button if not serial port is open
     def close_port(self):
         print('close button clicked')
-        if self.serialHelper.serial_port.isOpen():
-            self.serialHelper.stop()
-        else:
-            print("No open port")
+        if self.serialHelper is not None:
+            if self.serialHelper.serial_port.isOpen():
+                self.serialHelper.stop()
+            else:
+                print("No open port")
 
 
 if __name__ == '__main__':

@@ -5,6 +5,7 @@ import sys
 import qdarkstyle
 from PyQt5.QtCore import *
 from PyQt5.QtWidgets import *
+import SerialHelper as sh
 
 
 # TODO Disable key pad if not connected to a Serial Port
@@ -12,7 +13,7 @@ from PyQt5.QtWidgets import *
 # TODO add code to record script to scripting window
 # TODO add play function, play the script showing in scripting window
 class ControlPadDockWidget(QDockWidget):
-    def __init__(self, parent=None):
+    def __init__(self, serialHelper=None,parent=None):
         super(ControlPadDockWidget, self).__init__("Control Pad", parent)
         self.setObjectName('ControlPadDockWidget')
         self.setAllowedAreas(Qt.RightDockWidgetArea)
@@ -24,28 +25,32 @@ class ControlPadDockWidget(QDockWidget):
         vbox.addWidget(self.quickKeyPadWidget)
         vbox.addWidget(self.controlPadWidget)
         self.setWidget(controlPadWidget)
+        self.serialHelper = serialHelper
 
     def initQuickKeyPad(self):
         self.quickKeyPadWidget = QWidget()
         grid = QGridLayout()
-        # TODO Fill in proper names instead of placeholder
-        names = ['A', 'V', 'C', 'D', 'E', 'F', '/',
-                 '4', '5', '6', '#', '1', '2', '3', '-', '0',
-                 '.', '=', '+', 'K']
-        pos = [
-            (0, 0), (0, 1), (0, 2), (0, 3),
-            (1, 0), (1, 1), (1, 2), (1, 3),
-            (2, 0), (2, 1), (2, 2), (2, 3),
-            (3, 0), (3, 1), (3, 2), (3, 3),
-            (4, 0), (4, 1), (4, 2), (4, 3)
-        ]
-        j = 0
-        for i in names:
-            button = QPushButton(i)
-            grid.addWidget(button, pos[j][0], pos[j][1])
-            # TODO add connection to actions
-            button.clicked.connect(self.sendKey)
-            j = j + 1
+
+        self.alarmSettpingBtn = QPushButton("Alarm Setup")
+        grid.addWidget(self.alarmSettpingBtn, 0, 0)
+        self.alarmSettpingBtn.clicked.connect(lambda: self.sendKey(sh.VK_ALARM_SETUP))
+
+        self.ventModeBtn = QPushButton("Vent Modes")
+        grid.addWidget(self.ventModeBtn, 0, 1)
+        self.ventModeBtn.clicked.connect(lambda: self.sendKey(sh.VK_VENT_MODES))
+
+        self.wheelUpBtn = QPushButton("Up")
+        grid.addWidget(self.wheelUpBtn, 1, 0)
+        self.wheelUpBtn.clicked.connect(lambda: self.sendKey(sh.VK_UP))
+
+        self.wheelDownBtn = QPushButton("Down")
+        grid.addWidget(self.wheelDownBtn, 1, 1)
+        self.wheelDownBtn.clicked.connect(lambda: self.sendKey(sh.VK_DOWN))
+
+        self.returnBtn = QPushButton("Return")
+        grid.addWidget(self.returnBtn, 2, 0)
+        self.returnBtn.clicked.connect(lambda: self.sendKey(sh.VK_RETURN))
+
         self.quickKeyPadWidget.setLayout(grid)
 
     def initControlPad(self):
@@ -57,8 +62,10 @@ class ControlPadDockWidget(QDockWidget):
         vbox.addWidget(self.recordButton)
         vbox.addWidget(self.playButton)
 
-    def sendKey(self):
-        pass
+    def sendKey(self, key):
+        if self.parent().serialHelper is not None:
+            print('key sent', key)
+
 
 if __name__ == '__main__':
     print(PYQT_VERSION_STR)
@@ -66,7 +73,7 @@ if __name__ == '__main__':
     app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     mainWindow = QMainWindow()
     mainWindow.setCentralWidget(QWidget())
-    controlPadDockWidget = ControlPadDockWidget()
+    controlPadDockWidget = ControlPadDockWidget(sh.SerialHelper())
     mainWindow.addDockWidget(Qt.RightDockWidgetArea, controlPadDockWidget)
     mainWindow.setFixedSize(1024, 768)
     mainWindow.show()

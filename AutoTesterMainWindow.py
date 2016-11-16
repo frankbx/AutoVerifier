@@ -22,12 +22,13 @@ class AutoTesterMainWindow(QMainWindow):
         self.setCentralWidget(self.centralWidget)
         self.initMenu()
         self.initStatusBar()
-        self.serialPortDockWidget = SerialPortDockWidget(self)
-        self.addDockWidget(Qt.RightDockWidgetArea, self.serialPortDockWidget)  # ,Qt.BottomRightCorner)
-        self.controlPadDockWidget = ControlPadDockWidget(self)
+        self.serialHelper = None
+        self.serialPortDockWidget = SerialPortDockWidget(parent=self, serialHelper=self.serialHelper)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.serialPortDockWidget)
+        self.controlPadDockWidget = ControlPadDockWidget(parent=self, serialHelper=self.serialHelper)
         self.addDockWidget(Qt.RightDockWidgetArea, self.controlPadDockWidget)
         self.scriptDockWidget = ScriptDockWidget(self)
-        self.addDockWidget(Qt.RightDockWidgetArea, self.scriptDockWidget)  # ,Qt.TopRightCorner)
+        self.addDockWidget(Qt.RightDockWidgetArea, self.scriptDockWidget)
         self.tabifyDockWidget(self.controlPadDockWidget, self.serialPortDockWidget)
 
     def initCentralWidget(self):
